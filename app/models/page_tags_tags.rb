@@ -7,21 +7,21 @@ Search for all pages that have a certain keyword tag.
 <pre><code><r:keyword keywords="keyword1"> ... </r:keyword></code></pre>
 	}
 	tag "keyword" do |tag|
-
-		Page.find(:all, :conditions => getConditions(tag)).each do |page|
-			tag.locals.page = page
-			tag.locals.child = page
-			output << tag.expand
+		if (isOk?(tag)) then
+			tag.expand
 		end
 	end
 
-	def getConditions(tag)
-		raise "`keywords' attribute required" unless tag.attr["keywords"]
+	def isOk?(tag)
+		raise "`filter' attribute required" unless tag.attr["filter"]
 
-		conditions = []
-		tag.attr["keywords"].split(/\s+/).each do |keyword|
-			conditions << [ "keywords LIKE (?)", "%" + keyword + "%" ]
+		result = false
+		tag.attr["filter"].split(/\s+/).each do |keyword|
+			print "testing : #{keyword} on '#{tag.locals.page.keywords}'\n"
+			if (tag.locals.page.keywords.include?(keyword)) then
+				return true
+			end
 		end
-		conditions
+		return false
 	end
 end
