@@ -4,9 +4,9 @@ module KeywordFilterTags
 	desc %{
 Search for all pages that have a certain keyword tag.
 *Usage*:
-<pre><code><r:keyword keywords="keyword1"> ... </r:keyword></code></pre>
+<pre><code><r:if_keyword filter="keyword1 keyword2"> ... </r:if_keyword></code></pre>
 	}
-	tag "keyword" do |tag|
+	tag "if_keyword" do |tag|
 		if (isOk?(tag)) then
 			tag.expand
 		end
