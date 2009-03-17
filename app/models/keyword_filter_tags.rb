@@ -12,6 +12,17 @@ Search for all pages that have a certain keyword tag.
 		end
 	end
 
+	desc %{
+<p>Process content only if the current page <em>does not</em> contains the keywords specified. This tag does the exact inverse of the if_keyword tag.</p>
+*Usage*:
+<pre><code><r:unless_keyword filter="keyword1 keyword2"> ... </r:unless_keyword></code></pre>
+	}
+	tag "unless_keyword" do |tag|
+		if (not isOk?(tag)) then
+			tag.expand
+		end
+	end
+
 	def isOk?(tag)
 		raise "`filter' attribute required" unless tag.attr["filter"]
 
