@@ -1,4 +1,4 @@
-module PageTagsTags
+module KeywordFilterTags
 	include Radiant::Taggable
 
 	desc %{

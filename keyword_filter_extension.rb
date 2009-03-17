@@ -1,10 +1,10 @@
 # Uncomment this if you reference any of your controllers in activate
 # require_dependency 'application'
 
-class PageTagsExtension < Radiant::Extension
+class KeywordFilterExtension < Radiant::Extension
 	version "1.0"
-	description "Describe your extension here"
-	url "http://yourwebsite.com/page_tags"
+	description "Filter content based on the keywords of the current page, usefull to create 'tags'"
+	url "http://github.com/bogado/radiant-keyword_filter-extension/tree/master"
 
 	# define_routes do |map|
 	#   map.namespace :admin, :member => { :remove => :get } do |admin|
@@ -13,7 +13,7 @@ class PageTagsExtension < Radiant::Extension
 	# end
 
 	def activate
-		Page.send :include, PageTagsTags
+		Page.send :include, KeywordFilterTags
 		# admin.tabs.add "Page Tags", "/admin/page_tags", :after => "Layouts", :visibility => [:all]
 	end
 
