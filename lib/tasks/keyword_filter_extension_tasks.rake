@@ -6,18 +6,18 @@ namespace :radiant do
       task :migrate => :environment do
         require 'radiant/extension_migrator'
         if ENV["VERSION"]
-          PageTagsExtension.migrator.migrate(ENV["VERSION"].to_i)
+          KeywordFilterExtension.migrator.migrate(ENV["VERSION"].to_i)
         else
-          PageTagsExtension.migrator.migrate
+          KeywordFilterExtension.migrator.migrate
         end
       end
 
       desc "Copies public assets of the Page Tags to the instance public/ directory."
       task :update => :environment do
         is_svn_or_dir = proc {|path| path =~ /\.svn/ || File.directory?(path) }
-        puts "Copying assets from PageTagsExtension"
-        Dir[PageTagsExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
-          path = file.sub(PageTagsExtension.root, '')
+        puts "Copying assets from KeywordFilterExtension"
+        Dir[KeywordFilterExtension.root + "/public/**/*"].reject(&is_svn_or_dir).each do |file|
+          path = file.sub(KeywordFilterExtension.root, '')
           directory = File.dirname(path)
           mkdir_p RAILS_ROOT + directory
           cp file, RAILS_ROOT + path
